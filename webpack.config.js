@@ -1,13 +1,13 @@
-// require.resolve(/* webpackIgnore: true */"blabla")
 const HTMLPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: ["@babel/polyfill", "./src/index.js"],
   output: {
-    path: __dirname + "/dist",
-    filename: "bundle.js",
+    path: __dirname + '/dist',
+    filename: 'bundle.js',
   },
   devServer: {
     static: __dirname + "dist",
+    hot: true,
     port: 8080,
   },
   plugins: [
