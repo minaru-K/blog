@@ -1,4 +1,3 @@
-import { EvalSourceMapDevToolPlugin } from "webpack";
 import { Component } from "../core/component";
 
 export class NavigationComponent extends Component {

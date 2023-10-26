@@ -1,4 +1,3 @@
-// import "@babel/polyfill";
 import {HeaderComponent} from './components/header.components.js'
 import { NavigationComponent } from './components/navigation.component.js'
 

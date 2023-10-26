@@ -17,36 +17,13 @@ module.exports = {
     }),
   ],
   resolve: {
-    
-    fallback: {
-        // path: require.resolve("path-browserify"),
-        // crypto: require.resolve("crypto-browserify"),
-    // "babel-polyfill": require.resolve("@babel/polyfill"),
-        // buffer: require.resolve("buffer/"),
-        // stream: require.resolve("stream-browserify"),
-        // "util": require.resolve("util/"),
-        // "path": require.resolve("path-browserify")
-        "util": false,
-        "path": false,
-        "crypto": false,
-        "zlib": false,
-        "stream": false,
-        "buffer": false,
-        "https": false,
-        "http": false,
-        "url": false,
-        "vm":  false,
-        "querystring": false,
-        "os": false,
-      },
-      extensions: [".js"],
-    //   webpackIgnore: true,
+      extensions: [".js"]
   },
 
   module: {
     rules: [
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
