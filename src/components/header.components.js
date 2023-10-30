@@ -8,6 +8,7 @@ export class HeaderComponent extends Component {
     init() {
         if (localStorage.getItem('visited')){
             this.hide()
+            // this.$el.classList.remove("hide")
         }
         this.$el.querySelector('.js-header-start').addEventListener('click', buttonHandler.bind(this))
     }
@@ -15,5 +16,7 @@ export class HeaderComponent extends Component {
 
 function buttonHandler() {
     localStorage.setItem('visited', JSON.stringify(true))
+    // console.log(this)
     this.hide()
+    // this.$el.classList.add("hide")
 }

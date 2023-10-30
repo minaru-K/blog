@@ -10,9 +10,11 @@ export class Component {
 
     hide() {
         this.$el.classList.add('hide')
+        console.log('test', this.$el)
     }
 
     show() {
         this.$el.classList.remove('hide')
+        console.log('test', this.$el)
     }
 }
