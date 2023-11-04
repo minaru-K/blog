@@ -1,4 +1,4 @@
-import {HeaderComponent} from './components/header.components.js'
+import { HeaderComponent } from './components/header.components.js'
 import { NavigationComponent } from './components/navigation.component.js'
 import { CreateComponents } from './components/create.components.js'
 import { PostsComponents } from './components/posts.components.js'
