@@ -27,7 +27,7 @@ async function submitHandler(event) {
       ...this.form.value(),
     };
     await apiService.createPost(formData);
-    alert('Запись добавлена в базу данных')
+    alert("Запись добавлена в базу данных");
     this.form.clear();
   }
 }

@@ -1,6 +1,7 @@
- /* .hide {
-  display: none !important;
-} */
+ .hide {
+  display: none!important;
+  background-color: #4caf50;
+}
 
 .w-container {
   margin: 0 auto;

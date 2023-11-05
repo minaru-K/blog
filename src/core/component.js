@@ -10,17 +10,12 @@ export class Component {
   onHide() {}
 
   hide() {
-    // this.$el.classList.add('hide')
-    this.$el.style.display = "none";
+    this.$el.classList.add("hide");
     this.onHide();
-    // console.log('test', this.$el)
   }
 
   show() {
-    // this.$el.classList.remove('hide')
-
-    this.$el.style.display = "";
+    this.$el.classList.remove("hide");
     this.onShow();
-    // console.log('test', this.$el)
   }
 }
