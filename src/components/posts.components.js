@@ -17,14 +17,14 @@ export class PostsComponents extends Component {
     const posts = TransformService.fbObjectToArray(fbData);
     document.getElementById("posts").innerHTML = "";
     this.loader.hide();
-    renderPosts(posts);
+    renderPosts(posts, 'posts');
   }
 }
 
-function renderPosts(postsArray) {
+export default function renderPosts(postsArray, id) {
   Object.keys(postsArray).forEach((key) => {
     const button = addToFavorite(postsArray[key], postsArray, key)
-    document.getElementById("posts").insertAdjacentHTML(
+    document.getElementById(id).insertAdjacentHTML(
       "beforeend",
       `<div class="panel">
          <div class="panel-head">
@@ -50,14 +50,14 @@ function renderPosts(postsArray) {
 }
 
 function addToFavorite(obj, postsArray, key){
-  let temp = "";
-    temp = JSON.parse(localStorage.getItem("favorites"))
-    temp.map((el) => {
+  let isFavorite = false;
+  isFavorite = JSON.parse(localStorage.getItem("favorites"))
+  isFavorite.map((el) => {
       if (el.id == obj.id) {
-        temp = true
+        isFavorite = true
       }
     });
-    return temp == true
+    return isFavorite == true
       ? `<button class='button-round button-small button-danger' data-id='${postsArray[key].id}' data-title='${postsArray[key].title}'>Удалить</button>`
       : `<button class='button-round button-small button-primary' data-id='${postsArray[key].id}' data-title='${postsArray[key].title}'>Сохранить</button>`;
 }
