@@ -23,6 +23,7 @@ export class PostsComponents extends Component {
 
 function renderPosts(postsArray) {
   Object.keys(postsArray).forEach((key) => {
+    const button = addToFavorite(postsArray[key], postsArray, key)
     document.getElementById("posts").insertAdjacentHTML(
       "beforeend",
       `<div class="panel">
@@ -41,32 +42,66 @@ function renderPosts(postsArray) {
          </div>
         <div class="panel-footer w-panel-footer">
           <small>${postsArray[key].date}</small>
-          ${
-            JSON.parse(localStorage.getItem("favorites")).includes(
-              postsArray[key].id
-            )
-              ? `<button class='button-round button-small button-danger' data-id='${postsArray[key].id}'>Удалить</button>`
-              : `<button class='button-round button-small button-primary' data-id='${postsArray[key].id}'>Сохранить</button>`
-          }
-
+          ${button}
          </div>
         </div>`
     );
   });
 }
 
+function addToFavorite(obj, postsArray, key){
+  let temp = "";
+    temp = JSON.parse(localStorage.getItem("favorites"))
+    temp.map((el) => {
+      if (el.id == obj.id) {
+        temp = true
+      }
+    });
+    return temp == true
+      ? `<button class='button-round button-small button-danger' data-id='${postsArray[key].id}' data-title='${postsArray[key].title}'>Удалить</button>`
+      : `<button class='button-round button-small button-primary' data-id='${postsArray[key].id}' data-title='${postsArray[key].title}'>Сохранить</button>`;
+}
+
+
+// здесь в localstorage добавляется только id избранного объекта
+// function buttonHandler(event) {
+//   const $el = event.target;
+//   const id = event.target.dataset.id;
+//   if (id) {
+//     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+//     if (favorites.includes(id)) {
+//       favorites.splice(favorites.indexOf(id), 1);
+//       $el.classList.remove("button-danger");
+//       $el.classList.add("button-primary");
+//       $el.textContent = "Сохранить";
+//     } else {
+//       favorites.push(id);
+//       $el.classList.add("button-danger");
+//       $el.classList.remove("button-primary");
+//       $el.textContent = "Удалить";
+//     }
+//     localStorage.setItem("favorites", JSON.stringify(favorites));
+//   }
+// }
+
+
+// здесь в localstorage добавляется id и title избранного объекта
 function buttonHandler(event) {
   const $el = event.target;
-  const id = event.target.dataset.id;
+  const title = $el.dataset.title;
+  const id = $el.dataset.id;
   if (id) {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (favorites.includes(id)) {
-      favorites.splice(favorites.indexOf(id), 1);
+    if (favorites.findIndex((el) => el.id == id) != -1) {
+      favorites.splice(
+        favorites.findIndex((el) => el.id == id),
+        1
+      );
       $el.classList.remove("button-danger");
       $el.classList.add("button-primary");
       $el.textContent = "Сохранить";
     } else {
-      favorites.push(id);
+      favorites.push({ title, id });
       $el.classList.add("button-danger");
       $el.classList.remove("button-primary");
       $el.textContent = "Удалить";
