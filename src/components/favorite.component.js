@@ -40,14 +40,20 @@ function getFavoriteLikeObj(all, favorites) {
 }
 
 function renderFavoritesLink(obj) {
-  const favoriteDiv = document.getElementById("favorite");
-  favoriteDiv.innerHTML = "";
-  obj.map((el) => {
-    favoriteDiv.insertAdjacentHTML(
-      "beforeend",
-      `<p>${el.title} - <a data-id='${el.id}'>${el.id}</a></p><br>`
-    );
-  });
+  if (obj.length == 0) {
+    document.getElementById('favorite').innerHTML = '<h1>Вы не добавляли ничего в избранное!</h1>'
+    // let div = document.createElement('div')
+    // div.innerHTML = '<h1>Вы не добавляли ничего в избранное!</h1>'
+  } else {
+    const favoriteDiv = document.getElementById("favorite");
+    favoriteDiv.innerHTML = "";
+    obj.map((el) => {
+      favoriteDiv.insertAdjacentHTML(
+        "beforeend",
+        `<p>${el.title} - <a data-id='${el.id}'>${el.id}</a></p><br>`
+      );
+    });
+  }
 }
 
 async function renderFavoritePost(event) {
@@ -60,7 +66,7 @@ async function renderFavoritePost(event) {
 async function dataPreparation(event) {
   const postId = event.target.dataset.id;
   const posts = await apiService.fetchPosts();
-  const post = [];
+  let post = [];
   Object.keys(posts).map((key) => {
     if (key == postId) {
       posts[key]["id"] = key;
