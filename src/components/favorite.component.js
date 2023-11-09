@@ -8,13 +8,14 @@ export class FavoriteComponents extends Component {
     this.loader = loader;
   }
 
-  init() {
-    this.$el.addEventListener("click", renderFavoritePost.bind(this));
-    
-  }
+  init() {}
+
   async onShow() {
     this.loader.show();
     this.getPosts();
+    this.$el.addEventListener("click", renderFavoritePost.bind(this), {
+      once: true,
+    });
   }
 
   async getPosts() {
@@ -54,15 +55,12 @@ async function renderFavoritePost(event) {
   post.push(await dataPreparation(event));
   document.getElementById("favorite").innerHTML = "";
   renderPosts(post, "favorite");
-//   event.stopImmediatePropagation()
 }
 
 async function dataPreparation(event) {
-    // event.preventDefault()
-    // event.stopImmediatePropagation()
   const postId = event.target.dataset.id;
   const posts = await apiService.fetchPosts();
-  let post = [];
+  const post = [];
   Object.keys(posts).map((key) => {
     if (key == postId) {
       posts[key]["id"] = key;
@@ -72,4 +70,4 @@ async function dataPreparation(event) {
   return post;
 }
 
-// не работает удаление поста из избранного + прослушиватель реагирует на нажатия на самом избранном посте и возвращает undefined
+// не работает удаление поста из избранного
