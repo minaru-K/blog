@@ -1,6 +1,6 @@
 import { Component } from "../core/component";
 import { apiService } from "../services/api.services";
-import renderPosts from "./posts.components";
+import renderPosts from "../core/renderPosts";
 
 export class FavoriteComponents extends Component {
   constructor(id, { loader }) {
@@ -41,9 +41,8 @@ function getFavoriteLikeObj(all, favorites) {
 
 function renderFavoritesLink(obj) {
   if (obj.length == 0) {
-    document.getElementById('favorite').innerHTML = '<h1>Вы не добавляли ничего в избранное!</h1>'
-    // let div = document.createElement('div')
-    // div.innerHTML = '<h1>Вы не добавляли ничего в избранное!</h1>'
+    document.getElementById("favorite").innerHTML =
+      '<h1 class="center">Вы не добавляли ничего в избранное!</h1>';
   } else {
     const favoriteDiv = document.getElementById("favorite");
     favoriteDiv.innerHTML = "";
@@ -57,23 +56,7 @@ function renderFavoritesLink(obj) {
 }
 
 async function renderFavoritePost(event) {
-  const post = [];
-  post.push(await dataPreparation(event));
+  const post = await apiService.fetchOnePost(event.target.dataset.id);
   document.getElementById("favorite").innerHTML = "";
-  renderPosts(post, "favorite");
+  renderPosts(post, "favorite", false);
 }
-
-async function dataPreparation(event) {
-  const postId = event.target.dataset.id;
-  const posts = await apiService.fetchPosts();
-  let post = [];
-  Object.keys(posts).map((key) => {
-    if (key == postId) {
-      posts[key]["id"] = key;
-      post = posts[key];
-    }
-  });
-  return post;
-}
-
-// не работает удаление поста из избранного
