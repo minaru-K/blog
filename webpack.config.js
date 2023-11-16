@@ -8,7 +8,7 @@ module.exports = {
   devServer: {
     static: __dirname + "dist",
     hot: true,
-    port: 8080,
+    port: 2121,
   },
   plugins: [
     new HTMLPlugin({
