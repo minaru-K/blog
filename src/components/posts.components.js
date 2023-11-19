@@ -15,12 +15,18 @@ export class PostsComponents extends Component {
   async onShow() {
     this.loader.show();
     const fbData = await apiService.fetchPosts();
-    const posts = TransformService.fbObjectToArray(fbData);
-    document.getElementById("posts").innerHTML = "";
-    this.loader.hide();
-    Object.keys(posts).forEach((key) => {
-      renderPosts(posts[key], "posts", true)
-    });
+    if (fbData) {
+      const posts = TransformService.fbObjectToArray(fbData);
+      document.getElementById("posts").innerHTML = "";
+      this.loader.hide();
+      Object.keys(posts).forEach((key) => {
+        renderPosts(posts[key], "posts", true);
+      });
+    } else {
+      this.loader.hide();
+      document.getElementById("posts").innerHTML =
+        '<h1 class="center">Пока не добавлено ни одного поста.</h1>';
+    }
   }
 }
 

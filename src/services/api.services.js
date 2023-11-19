@@ -44,5 +44,5 @@ async function useRequest(request) {
 }
 
 export const apiService = new ApiService(
-  "https://forms-js-3a7c6-default-rtdb.firebaseio.com"
+  // paste your API like string
 );

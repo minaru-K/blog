@@ -20,9 +20,15 @@ export class FavoriteComponents extends Component {
 
   async getPosts() {
     const posts = await apiService.fetchPosts();
-    const favoritePosts = JSON.parse(localStorage.getItem("favorites"));
-    this.loader.hide();
-    renderFavoritesLink(getFavoriteLikeObj(await posts, favoritePosts));
+    if (posts) {
+      const favoritePosts = JSON.parse(localStorage.getItem("favorites"));
+      this.loader.hide();
+      renderFavoritesLink(getFavoriteLikeObj(await posts, favoritePosts));
+    } else {
+      this.loader.hide();
+      document.getElementById("favorite").innerHTML =
+        '<h1 class="center">Вы не добавляли ничего в избранное!</h1>';
+    }
   }
 }
 
