@@ -1,6 +1,6 @@
 export class Validators {
     static required(value) {
-        return value && value.trim()
+        return value?.trim()
     }
 
     static minLength(length) {

@@ -1,6 +1,7 @@
 export default function renderPosts(post, id, buttonVisibility) {
     const button = addToFavorite(post);
-    document.getElementById(id).insertAdjacentHTML(
+    document.getElementById(id)
+        .insertAdjacentHTML(
         "beforeend",
         `<div class="panel">
                    <div class="panel-head">
@@ -14,7 +15,7 @@ export default function renderPosts(post, id, buttonVisibility) {
                       </ul>
                    </div>
                    <div class="panel-body">
-                       <p class="multi-line">${post.fulltext}</p>
+                       <p class="multi-line">${post.fullText}</p>
                    </div>
                   <div class="panel-footer w-panel-footer">
                     <small>${post.date}</small>
@@ -35,7 +36,7 @@ function addToFavorite(post) {
                 isFavorite = true;
             }
         });
-        return isFavorite === true
+        return isFavorite
             ? `<button class='button-round button-small button-danger' data-id='${post.id}' data-title='${post.title}'>Удалить</button>`
             : `<button class='button-round button-small button-primary' data-id='${post.id}' data-title='${post.title}'>Сохранить</button>`;
     }

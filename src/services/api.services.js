@@ -5,7 +5,7 @@ class ApiService {
 
     async createPost(post) {
         try {
-            const request = new Request(this.url + "/posts.json", {
+            const request = new Request(this.url + "/save", {
                 method: "post",
                 body: JSON.stringify(post),
             });
@@ -17,8 +17,8 @@ class ApiService {
 
     async fetchPosts() {
         try {
-            const request = new Request(`${this.url}/posts.json`, {
-                method: "get",
+            const request = new Request(`${this.url}`, {
+                method: "get"
             });
             return useRequest(request);
         } catch (error) {
@@ -28,8 +28,8 @@ class ApiService {
 
     async fetchOnePost(id) {
         try {
-            const request = new Request(`${this.url}/posts/${id}.json`, {
-                method: "get",
+            const request = new Request(`${this.url}/get/${id}`, {
+                method: "get"
             });
             return useRequest(request);
         } catch (error) {
@@ -44,5 +44,5 @@ async function useRequest(request) {
 }
 
 export const apiService = new ApiService(
-    "http://localhost:8080/microservice/api"
+    "http://localhost:8080/microservice/api/posts"
 )

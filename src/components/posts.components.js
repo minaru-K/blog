@@ -16,6 +16,7 @@ export class PostsComponents extends Component {
     async onShow() {
         this.loader.show();
         const fbData = await apiService.fetchPosts();
+        console.log(fbData)
         if (fbData) {
             const posts = TransformService.fbObjectToArray(fbData);
             document.getElementById("posts").innerHTML = "";
