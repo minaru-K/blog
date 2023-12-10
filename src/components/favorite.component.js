@@ -34,16 +34,13 @@ export class FavoriteComponents extends Component {
 }
 
 function getFavoriteLikeObj(all, favorites) {
-    const favoritesObj = [];
-    Object.keys(all).map((key) => {
-        favorites.map((el) => {
-            if (el.id === key) {
-                all[key]["id"] = key;
-                favoritesObj.push(all[key]);
-            }
-        });
-    });
-    return favoritesObj;
+    return Object.keys(all)
+        .flatMap(
+            (key) =>
+                favorites
+                    .filter(el => el.id === key)
+                    .map(() => ({...all[key], id: key}))
+        );
 }
 
 function renderFavoritesLink(obj) {
