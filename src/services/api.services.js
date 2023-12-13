@@ -44,5 +44,5 @@ async function useRequest(request) {
 }
 
 export const apiService = new ApiService(
-    "http://localhost:8080/microservice/api/posts"
+    process.env.BACKEND_API
 )
