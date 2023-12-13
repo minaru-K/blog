@@ -15,10 +15,12 @@ export class PostsComponents extends Component {
 
     async onShow() {
         this.loader.show();
-        const fbData = await apiService.fetchPosts();
-        console.log(fbData)
-        if (fbData) {
-            const posts = TransformService.fbObjectToArray(fbData);
+        const dbData = await apiService.fetchPosts();
+        console.log(dbData)
+        // const temp = dbData
+        if (dbData) {
+            const posts = TransformService.fbObjectToArray(dbData);
+            console.log(posts)
             document.getElementById("posts").innerHTML = "";
             this.loader.hide();
             Object.keys(posts).forEach((key) => {

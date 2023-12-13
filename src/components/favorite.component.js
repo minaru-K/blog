@@ -17,6 +17,7 @@ export class FavoriteComponents extends Component {
         this.$el.addEventListener("click", renderFavoritePost.bind(this), {
             once: true,
         });
+
     }
 
     async getPosts() {
@@ -34,13 +35,16 @@ export class FavoriteComponents extends Component {
 }
 
 function getFavoriteLikeObj(all, favorites) {
-    return Object.keys(all)
-        .flatMap(
-            (key) =>
-                favorites
-                    .filter(el => el.id === key)
-                    .map(() => ({...all[key], id: key}))
-        );
+    const favoritesObj = [];
+    Object.keys(all).map((key) => {
+        favorites.map((el) => {
+            if (el.id === key) {
+                all[key]["id"] = key;
+                favoritesObj.push(all[key]);
+            }
+        });
+    });
+    return favoritesObj;
 }
 
 function renderFavoritesLink(obj) {
